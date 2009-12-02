@@ -1,0 +1,52 @@
+HOW IT WORKS
+
+1. Randomly generate a population.
+2. Create tournament of that population.
+3. Run the fitness function on the population of that tournament.
+4. Apply the crossover to our two best individuals in the tournament. (80% chance of this happening)
+(Think of it as breeding the fittest.  This will yield two children)
+5. Perform a mutation (5% chance of mutation) if we hit our mark,
+or just return the child as-is.
+6. Check our stopping criteria to see if we are done
+(we check the two children we just created).
+7. Add those children to a new population, which (once it reaches the same
+size as our original population) will replace our original (or parent) population.
+We define what a "perfect" individual looks like.
+Our "perfect" genome is the alphabet in this case.
+(Go to step 2 and repeat)
+
+ADJUSTMENTS (how you can change stuff)
+
+-define(CORRECT, "ABCDEFGHIJKLMNOPQRSTUVWXYZ").
+
+By changing CORRECT, you are defining what your desired result should look like. In other words, what you are evolving towards.
+You can make this longer, shorter (what fun is that?) and the algorithm will continue to evolve towards it
+
+-define(POPSIZE, 1000). %% Size of our population for each tournament
+
+Changing POPSIZE will just alter the amount of individuals in your population (and how many children to collect before replacing it)
+
+Larger POPSIZEs *should* yield smaller generations before hitting your check constraint and completing.
+
+-define(TOURNAMENT_SIZE, 10).
+
+Changing TOURNAMENT_SIZE will change the number of individuals within a tournament.
+You pick (at random) this many (TOURNAMENT_SIZE) individuals from your population.
+
+-define(COUNTER_TABLE,generation_counter).
+
+This is just the name of the ets table that I store a counter in.  In time, there will be more counters (and in theory stats see TODO)
+
+TODO
+
+Print print best of EACH GENERATION (not tournament like it is now).
+
+Break things out of a single script and place them into appropriate modules.
+Add tests (yes, they SHOULD have been here first).
+Add stats so that we can analyze generally how many generations it takes to get to our check constraint given the population and tourney sizes.
+I'm sure much more...
+
+GENERAL
+
+I am no means an expert on EA's this was merely an exercise a friend of mine suggested I try out.
+This is the first one I've ever attempted and I've (clearly) got a ways to go with Erlang, so suggest away!
