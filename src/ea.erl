@@ -109,9 +109,9 @@ seed_tournament(OrigPop,AccPop,N) ->
 %% otherwise, we will use the one passed in (the children we just generated)
 run_tournament(Individuals) ->
 	Results = population_fitness(Individuals), % How fit is our population
-	{Winner,WinningScore} = hd(Results), % Get the alpha of our population
+	{Winner,_WinningScore} = hd(Results), % Get the alpha of our population
 	{RunnerUp,_RunnerUpScore} = lists:nth(2,Results), % Get the second alpha
-	io:format("Best of Tournament: ~p Score: ~p~n",[Winner,WinningScore]),
+	% io:format("Best of Tournament: ~p Score: ~p~n",[Winner,WinningScore]),
 	[{a,ChildA},{b,ChildB}] = crossover(Winner,RunnerUp), % Breed them together
 	[MutatedChildA, MutatedChildB] = [mutate(ChildA),mutate(ChildB)],
 	case criteria_check(MutatedChildA, MutatedChildB) of
@@ -151,9 +151,11 @@ mutate(Child) ->
 
 %% Criteria Check to halt on.
 %% Here we check to see if we've hit what we think of as "complete".
-%% You'll notice on the AlphaLimit that it is set to 15.
+%% You'll notice on the AlphaLimit that it is set to the size of ?CORRECT.
 %% We finish if either Child A or Child B are good enough for us to stop.
-%% So if they are 15 or better, we'll stop and see what our near-perfect genome is.
+%% So if they are 26 (assuming you haven't changed ?CORRECT) or better, 
+%% we'll stop and see what our near-perfect genome is.
+%% fool around with this (set it lower).
 criteria_check(ChildA,ChildB) -> %%This could be a lot better!!!
 	{CA,ChildAFitness} = fit(ChildA),
 	{CB,ChildBFitness} = fit(ChildB),

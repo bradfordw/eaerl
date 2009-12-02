@@ -37,6 +37,9 @@ You pick (at random) this many (TOURNAMENT_SIZE) individuals from your populatio
 
 This is just the name of the ets table that I store a counter in.  In time, there will be more counters (and in theory stats see TODO)
 
+MORE EXPLANATION
+See code, there are more explanations in there (via comments that is).
+
 TODO
 
 Print print best of EACH GENERATION (not tournament like it is now).
